@@ -1,1 +1,3 @@
-# django-foodie
+# Django Tutorial
+
+## Foodie
