@@ -1,0 +1,169 @@
+body {
+	color: #455A64 !important;
+	font-family: -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", sans-serif !important;
+	padding-top: 56px;
+	display: flex;
+	flex-flow: column;
+	min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	line-height: 1.5em !important;
+	letter-spacing: 0.1em !important;
+}
+
+p {
+	line-height: 1.65em !important;
+	text-align: justify !important;
+	letter-spacing: 0.05em !important;
+}
+
+main {
+	flex: 1;
+}
+
+.bg-image-full {
+	background-image: url('/static/image/top.jpg');
+	background-color: #868e96;
+	background-attachment: scroll;
+	position: relative;
+	background-size: cover;
+}
+
+.bg-image-full .overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: #212529;
+	opacity: 0.2;
+}
+
+.bg-image-full .site-heading {
+	padding: 100px 0;
+	text-align: center;
+}
+
+.bg-image-full .site-heading h1 {
+	color: white;
+	font-size: 80px;
+}
+
+*:focus {
+	box-shadow: none !important;
+}
+
+.card img {
+	width: 100%;
+	height: 200px;
+	object-fit: cover;
+}
+
+label, input[type='checkbox'] {
+	cursor: pointer;
+}
+
+.img-search {
+	width: 200px;
+	height: 100%;
+	object-fit: cover;
+}
+
+.my-icon {
+	color: red !important;
+}
+
+.my-icon2 {
+	color: coral !important;
+}
+
+.img-carousel {
+	width: 100%;
+	height: 300px;
+	object-fit: cover;
+}
+
+.evaluation {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: center;
+}
+
+.evaluation input[type="radio"] {
+	display: none;
+}
+
+.evaluation label {
+	position: relative;
+	padding: 10px 10px 0;
+	color: #ccc;
+	cursor: pointer;
+	font-size: 30px;
+}
+
+.evaluation label .text {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	text-align: center;
+	font-size: 12px;
+	color: gray;
+}
+
+.evaluation label:hover, .evaluation label:hover~label, .evaluation input[type="radio"]:checked~label {
+	color: coral;
+}
+
+textarea {
+	width: 80%;
+	border-radius: 3px;
+}
+
+.star-rating {
+	position: relative;
+	font-size: 30px;
+	word-wrap: normal !important;
+}
+
+.star-rating-front {
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	color: coral;
+}
+
+.star-rating-back {
+	color: #ccc;
+}
+
+.average {
+	color: red;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.review-count {
+	vertical-align: middle;
+}
+
+.gnavi {
+	color: white;
+}
+
+.gnavi:hover {
+	color: #28A745;
+	text-decoration: none;
+}
+
+.page-item.active .page-link {
+    background-color: #28A745 !important;
+	border-color: #28A745 !important;
+	color: #fff !important;
+}
+
+.page-link {
+    color: #28A745 !important;
+}
