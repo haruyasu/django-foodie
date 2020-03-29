@@ -1,5 +1,5 @@
 from django import forms
-from .models import Category, Pref
+from .models import Category, Pref, Review
 
 
 class SearchForm(forms.Form):
@@ -24,3 +24,8 @@ class SearchForm(forms.Form):
         super().__init__(*args, **kwargs)
         pref = self.fields['pref']
         category = self.fields['category']
+
+class ReviewForm(forms.ModelForm): # 追加
+    class Meta:
+        model = Review
+        fields = ['score', 'comment']
