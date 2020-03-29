@@ -1,0 +1,386 @@
+{% extends 'foodie/base.html' %}
+{% load static %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-md-3">
+			<div class="card my-4">
+				<h5 class="card-header">お店を探す</h5>
+				<div class="card-body">
+					<form method="GET" action="{% url 'search' %}" name="searchform">
+						<div class="row">
+							<div class="col-12 mb-2">
+								<label>エリア</label>
+								<select class="form-control" name="pref">
+									<option value="">こだわらない</option>
+									{% for item in pref_list %}
+									<option value="{{item.pref}}">{{ item.name }}</option>
+									{% endfor %}
+								</select>
+							</div>
+							<div class="col-12 mb-2">
+								<label>ジャンル</label>
+								<select class="form-control" name="category_l">
+									<option value="">こだわらない</option>
+									{% for item in category_list %}
+									<option value="{{item.category_l}}">{{ item.name }}</option>
+									{% endfor %}
+								</select>
+							</div>
+							<div class="col-12 mb-2">
+								<div class="form-group">
+									<label>フリーワード</label>
+									<input class="form-control" type="text" placeholder="こだわらない"
+										aria-label="Search" name="freeword">
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="lunch">
+										<input type="hidden" name="lunch" value="0">
+										<input type="checkbox" class="form-check-input" id="lunch" name="lunch"
+											value="1">ランチ営業
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="no_smoking">
+										<input type="hidden" name="no_smoking" value="0">
+										<input type="checkbox" class="form-check-input" id="no_smoking"
+											name="no_smoking" value="1">禁煙席
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="card">
+										<input type="hidden" name="card" value="0">
+										<input type="checkbox" class="form-check-input" id="card" name="card"
+											value="1">カード利用可
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="mobilephone">
+										<input type="hidden" name="mobilephone" value="0">
+										<input type="checkbox" class="form-check-input" id="mobilephone"
+											name="mobilephone" value="1">携帯の電波
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="bottomless_cup">
+										<input type="hidden" name="bottomless_cup" value="0">
+										<input type="checkbox" class="form-check-input" id="bottomless_cup"
+											name="bottomless_cup" value="1">飲み放題
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="sunday_open">
+										<input type="hidden" name="sunday_open" value="0">
+										<input type="checkbox" class="form-check-input" id="sunday_open"
+											name="sunday_open" value="1">日曜営業
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="takeout">
+										<input type="hidden" name="takeout" value="0">
+										<input type="checkbox" class="form-check-input" id="takeout"
+											name="takeout" value="1">テイクアウト
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="private_room">
+										<input type="hidden" name="private_room" value="0">
+										<input type="checkbox" class="form-check-input" id="private_room"
+											name="private_room" value="1">個室
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="midnight">
+										<input type="hidden" name="midnight" value="0">
+										<input type="checkbox" class="form-check-input" id="midnight"
+											name="midnight" value="1">深夜営業
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="parking">
+										<input type="hidden" name="parking" value="0">
+										<input type="checkbox" class="form-check-input" id="parking"
+											name="parking" value="1">駐車場
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="memorial_service">
+										<input type="hidden" name="memorial_service" value="0">
+										<input type="checkbox" class="form-check-input" id="memorial_service"
+											name="memorial_service" value="1">法事利用可
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="birthday_privilege">
+										<input type="hidden" name="birthday_privilege" value="0">
+										<input type="checkbox" class="form-check-input" id="birthday_privilege"
+											name="birthday_privilege" value="1">誕生日特典
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="betrothal_present">
+										<input type="hidden" name="betrothal_present" value="0">
+										<input type="checkbox" class="form-check-input" id="betrothal_present"
+											name="betrothal_present" value="1">結納利用可
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="kids_menu">
+										<input type="hidden" name="kids_menu" value="0">
+										<input type="checkbox" class="form-check-input" id="kids_menu"
+											name="kids_menu" value="1">キッズメニュー
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="outret">
+										<input type="hidden" name="outret" value="0">
+										<input type="checkbox" class="form-check-input" id="outret"
+											name="outret" value="1">電源
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="wifi">
+										<input type="hidden" name="wifi" value="0">
+										<input type="checkbox" class="form-check-input" id="wifi" name="wifi"
+											value="1">wifi
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="microphone">
+										<input type="hidden" name="microphone" value="0">
+										<input type="checkbox" class="form-check-input" id="microphone"
+											name="microphone" value="1">マイク
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="buffet">
+										<input type="hidden" name="buffet" value="0">
+										<input type="checkbox" class="form-check-input" id="buffet"
+											name="buffet" value="1">食べ放題
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="late_lunch">
+										<input type="hidden" name="late_lunch" value="0">
+										<input type="checkbox" class="form-check-input" id="late_lunch"
+											name="late_lunch" value="1">14時以降のランチ
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="sports">
+										<input type="hidden" name="sports" value="0">
+										<input type="checkbox" class="form-check-input" id="sports"
+											name="sports" value="1">スポーツ観戦可
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="until_morning">
+										<input type="hidden" name="until_morning" value="0">
+										<input type="checkbox" class="form-check-input" id="until_morning"
+											name="until_morning" value="1">朝まで営業
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="lunch_desert">
+										<input type="hidden" name="lunch_desert" value="0">
+										<input type="checkbox" class="form-check-input" id="lunch_desert"
+											name="lunch_desert" value="1">ランチデザート
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="projecter_screen">
+										<input type="hidden" name="projecter_screen" value="0">
+										<input type="checkbox" class="form-check-input" id="projecter_screen"
+											name="projecter_screen" value="1">プロジェクター
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="with_pet">
+										<input type="hidden" name="with_pet" value="0">
+										<input type="checkbox" class="form-check-input" id="with_pet"
+											name="with_pet" value="1">ペット同伴可
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="deliverly">
+										<input type="hidden" name="deliverly" value="0">
+										<input type="checkbox" class="form-check-input" id="deliverly"
+											name="deliverly" value="1">デリバリー
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="special_holiday_lunch">
+										<input type="hidden" name="special_holiday_lunch" value="0">
+										<input type="checkbox" class="form-check-input"
+											id="special_holiday_lunch" name="special_holiday_lunch"
+											value="1">土日特別ランチ
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="e_money">
+										<input type="hidden" name="e_money" value="0">
+										<input type="checkbox" class="form-check-input" id="e_money"
+											name="e_money" value="1">電子マネー利用可
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="caterling">
+										<input type="hidden" name="caterling" value="0">
+										<input type="checkbox" class="form-check-input" id="caterling"
+											name="caterling" value="1">ケータリング
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="breakfast">
+										<input type="hidden" name="breakfast" value="0">
+										<input type="checkbox" class="form-check-input" id="breakfast"
+											name="breakfast" value="1">モーニング
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="bento">
+										<input type="hidden" name="bento" value="0">
+										<input type="checkbox" class="form-check-input" id="bento" name="bento"
+											value="1">お弁当
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="desert_buffet">
+										<input type="hidden" name="desert_buffet" value="0">
+										<input type="checkbox" class="form-check-input" id="desert_buffet"
+											name="desert_buffet" value="1">デザートビュッフェ
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="lunch_buffet">
+										<input type="hidden" name="lunch_buffet" value="0">
+										<input type="checkbox" class="form-check-input" id="lunch_buffet"
+											name="lunch_buffet" value="1">ランチビュッフェ
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="lunch_salad_buffet">
+										<input type="hidden" name="lunch_salad_buffet" value="0">
+										<input type="checkbox" class="form-check-input" id="lunch_salad_buffet"
+											name="lunch_salad_buffet" value="1">ランチサラダバー
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="darts">
+										<input type="hidden" name="darts" value="0">
+										<input type="checkbox" class="form-check-input" id="darts" name="darts"
+											value="1">ダーツ
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 col-6">
+								<div class="form-group form-check">
+									<label class="form-check-label" for="web_reserve">
+										<input type="hidden" name="web_reserve" value="0">
+										<input type="checkbox" class="form-check-input" id="web_reserve"
+											name="web_reserve" value="1">Web予約可
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="text-center">
+							<button class="btn btn-success" type="submit">再検索</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-9">
+			{% if restaurant_list %}
+				<p class="my-4">検索結果 {{ total_hit_count }} 件</p>
+				{% for resutaurant in restaurant_list %}
+				<div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+					<div class="col-auto">
+						<img src="{{ resutaurant.11 }}" alt="{{ resutaurant.2 }}" class="img-rounded img-responsive img-search">
+					</div>
+					<div class="col p-4 d-flex flex-column position-static">
+						<strong class="d-inline-block mb-2 text-success">{{ resutaurant.32 }}</strong>
+						<h4 class="mb-2">{{ resutaurant.2 }}</h4>
+						<p class="card-text mb-1"><i
+								class="fas fa-subway fa-fw my-icon"></i>{{ resutaurant.21 }}・徒歩{{ resutaurant.23 }}分</p>
+						<p class="card-text mb-2"><i class="fas fa-yen-sign fa-fw my-icon"></i>平均{{ resutaurant.33 }}円</p>
+						<p class="card-text mb-auto">{{ resutaurant.26 }}</p>
+						<a href="{% url 'shop_info' resutaurant.0 %}" class="stretched-link"></a>
+					</div>
+				</div>
+				{% endfor %}
+			{% else %}
+				<h4 class="mt-5">該当するものはありません。</h4>
+			{% endif %}
+		</div>
+	</div>
+{% endblock content %}

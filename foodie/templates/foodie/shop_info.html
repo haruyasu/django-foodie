@@ -1,0 +1,89 @@
+{% extends 'foodie/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="row align-items-center my-3">
+        <div class="col-md-4">
+            <div id="carouselControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{{ restaurants_info.0.11 }}" class="d-block img-carousel" alt="{{ restaurants_info.0.2 }}">
+                    </div>
+                    {% if restaurants_info.0.12 %}
+                    <div class="carousel-item">
+                        <img src="{{ restaurants_info.0.12 }}" class="d-block img-carousel" alt="{{ restaurants_info.0.2 }}">
+                    </div>
+                    {% endif %}
+                </div>
+                <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">前</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">次</span>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <strong class="d-inline-block mb-2 text-success">{{ restaurants_info.0.32 }}</strong>
+                <h3 class="mb-2">{{ restaurants_info.0.2 }}</h3>
+                <hr>
+                <p class="card-text mb-1"><i class="fas fa-map-marker-alt fa-fw my-icon"></i>{{ restaurants_info.0.14 }}</p>
+                <p class="card-text mb-3"><i class="fas fa-subway fa-fw my-icon"></i>{{ restaurants_info.0.21 }}・徒歩{{ restaurants_info.0.23 }}分</p>
+                <p class="card-text mb-auto">{{ restaurants_info.0.27|linebreaksbr }}</p>   
+            </div>
+        </div>
+
+        <div class="col-12 mt-3">
+            <p><i class="fas fa-store-alt fa-fw my-icon2"></i> お店情報</p>
+            <div class="table-responsive">
+                <table class="table table-bordered table-sm">
+                    <tr>
+                        <td class="bg-light text-center" style="width:20%">お店</td>
+                        <td><a href="{{ restaurants_info.0.7 }}">{{ restaurants_info.0.2 }}</a></td>
+                    </tr>
+                    <tr>
+                        <td class="bg-light text-center">住所</td>
+                        <td><a href="https://www.google.com/maps?q={{ restaurants_info.0.4 }},{{ restaurants_info.0.5 }}" target="_blank">{{ restaurants_info.0.14 }}</a></td>
+                    </tr>
+                    <tr>
+                        <td class="bg-light text-center">アクセス</td>
+                        <td>{{ restaurants_info.0.20 }} {{ restaurants_info.0.21 }} {{ restaurants_info.0.22 }} 徒歩{{ restaurants_info.0.23 }}分</td>
+                    </tr>
+                    <tr>
+                        <td class="bg-light text-center">電話番号</td>
+                        <td>
+                            <a href="tel:{{ restaurants_info.0.15 }}">{{ restaurants_info.0.15 }}</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="bg-light text-center">営業時間</td>
+                        <td>{{ restaurants_info.0.18|linebreaksbr }}</td>
+                    </tr>
+                    <tr>
+                        <td class="bg-light text-center">定休日</td>
+                        <td>{{ restaurants_info.0.19 }}</td>
+                    </tr>
+                    <tr>
+                        <td class="bg-light text-center">平均予算</td>
+                        <td>{{ restaurants_info.0.33 }}円</td>
+                    </tr>
+                    <tr>
+                        <td class="bg-light text-center">駐車場</td>
+                        <td>{{ restaurants_info.0.25 }}</td>
+                    </tr>
+                    <tr>
+                        <td class="bg-light text-center">クレジットカード</td>
+                        <td>{{ restaurants_info.0.36 }}</td>
+                    </tr>
+                    <tr>
+                        <td class="bg-light text-center">電子マネー</td>
+                        <td>{{ restaurants_info.0.37 }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
