@@ -169,8 +169,8 @@
                         </form>
                     {% else %}
                         <p mb-3>レポートを書くには、ログインして下さい。</p>
-                        <a class="btn btn-success" href="">新規登録</a>
-                        <a class="btn btn-success" href="">ログイン</a>
+                        <a class="btn btn-success" href="{% url 'account_signup' %}">サインアップ</a>
+                        <a class="btn btn-success" href="{% url 'account_login' %}">ログイン</a>
                     {% endif %}
                 </div>
             </div>

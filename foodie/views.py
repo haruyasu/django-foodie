@@ -4,6 +4,7 @@ from .models import Pref, Category, Review
 from .forms import SearchForm, ReviewForm
 from django.db.models import Avg
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import json
 import requests
 
@@ -17,9 +18,27 @@ class IndexView(TemplateView):
     def get_context_data(self, *args, **kwargs):
         searchform = SearchForm()
 
+        # おすすめレストラン
+        category_l = "RSFST09000" # 居酒屋
+        pref = "PREF13" # 東京都
+        freeword = "歓送迎会"
+        num = 6
+
+        query = get_gnavi_data(
+            "",
+            category_l,
+            pref,
+            freeword,
+            num
+        )
+
+        result = gnavi_api(query)
+        pickup_restaurant = get_restaurant_info(result)
+
         params = {
-            'searchform': searchform
-        }
+            'searchform': searchform,
+            'pickup_restaurant': pickup_restaurant,
+            }
         return params
 
 
@@ -112,10 +131,12 @@ def Search(request):
             result = gnavi_api(query)
             total_hit_count = len(result)
             restaurant_list = get_restaurant_info(result)
+            page_obj = paginate_queryset(request, restaurant_list, 10)
 
         context = {
             'total_hit_count': total_hit_count,
-            'restaurant_list': restaurant_list
+            'restaurant_list': page_obj.object_list,
+            'page_obj': page_obj,
         }
 
         return render(request, 'foodie/search.html', context)
@@ -182,6 +203,18 @@ def gnavi_api(params):
     if "error" not in result_json:
         result.extend(result_json["rest"])
     return result
+
+
+def paginate_queryset(request, queryset, count):
+    paginator = Paginator(queryset, count)
+    page = request.GET.get('page')
+    try:
+        page_obj = paginator.page(page)
+    except PageNotAnInteger:
+        page_obj = paginator.page(1)
+    except EmptyPage:
+        page_obj = paginator.page(paginator.num_pages)
+    return page_obj
 
 
 def get_gnavi_data(

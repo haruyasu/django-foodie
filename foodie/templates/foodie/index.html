@@ -372,4 +372,24 @@
             </div>
         </form>
     </div>
+
+    <h2 class="mb-4">歓送迎会 おすすめのお店 <i class="fas fa-beer my-icon2"></i></h2>
+
+    <div class="row">
+        {% for restaurant in pickup_restaurant %}
+        <div class="col-md-4 mb-5">
+            <div class="card h-100">
+                <img class="card-img-top" src="{{ restaurant.11 }}" alt="">
+                <div class="card-body">
+                    <strong class="d-inline-block mb-2 text-success">{{ restaurant.32 }}</strong>
+                    <h4 class="mb-2">{{ restaurant.2 }}</h4>
+                    <p class="card-text mb-1"><i class="fas fa-subway fa-fw my-icon"></i>{{ restaurant.21 }}・徒歩{{ restaurant.23 }}分</p>
+                    <p class="card-text mb-2"><i class="fas fa-yen-sign fa-fw my-icon"></i>平均{{ restaurant.33 }}円</p>
+                    <p class="card-text mb-auto">{{ restaurant.26|linebreaksbr }}</p>
+                </div>
+                <a href="{% url 'shop_info' restaurant.0 %}" class="stretched-link"></a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 {% endblock content %}
