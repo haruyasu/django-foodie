@@ -379,7 +379,11 @@
         {% for restaurant in pickup_restaurant %}
         <div class="col-md-4 mb-5">
             <div class="card h-100">
-                <img class="card-img-top" src="{{ restaurant.11 }}" alt="">
+                {% if restaurant.11 %}
+                    <img class="card-img-top" src="{{ restaurant.11 }}" alt="{{ restaurant.2 }}">
+                {% else %}
+                    <img class="card-img-top" src="https://placehold.jp/300x300.png?text=No Image" alt="{{ restaurant.2 }}">
+                {% endif %}
                 <div class="card-body">
                     <strong class="d-inline-block mb-2 text-success">{{ restaurant.32 }}</strong>
                     <h4 class="mb-2">{{ restaurant.2 }}</h4>
