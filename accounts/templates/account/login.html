@@ -1,0 +1,40 @@
+{% extends "foodie/base.html" %}
+
+{% block header %}
+	<header class="py-5 mb-3 bg-image-full">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-md-10 mx-auto">
+					<div class="site-heading">
+						<h1>Login</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+{% endblock header %}
+
+{% block content %}
+	<p class="text-center mb-4">
+		アカウントをまだお持ちでなければ、こちらから<a href="{% url 'account_signup' %}">ユーザー登録</a>して下さい。
+    </p>
+	<div class="row justify-content-center mb-4">
+		<form method="post" action="{% url 'account_login' %}">
+			{% csrf_token %}
+			<table class="table">{{ form.as_table }}</table>
+			{% if redirect_field_value %}
+			<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+			{% endif %}
+            <!-- Email設定が必要 -->
+			<!--
+            <p class="text-center">
+				<a class="button secondaryAction" href="{% url 'account_reset_password' %}">パスワードをお忘れですか？</a>
+            </p>
+            -->
+			<div class="text-center">
+				<button type="submit" class="save btn btn-success" role="button">ログイン</button>
+			</div>
+		</form>
+	</div>
+{% endblock %}
